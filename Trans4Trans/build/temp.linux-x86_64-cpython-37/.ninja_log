@@ -1,0 +1,3 @@
+# ninja log v5
+0	9476	1687924453328083001	/home/MichaelWang/Trans4Trans/build/temp.linux-x86_64-cpython-37/home/MichaelWang/Trans4Trans/segmentron/modules/csrc/criss_cross_attention/ca_cuda.o	3d126198af42676e
+0	16092	1687924459944060603	/home/MichaelWang/Trans4Trans/build/temp.linux-x86_64-cpython-37/home/MichaelWang/Trans4Trans/segmentron/modules/csrc/vision.o	52800f78bc133916
