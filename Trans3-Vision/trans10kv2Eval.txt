@@ -1,0 +1,806 @@
+2023-09-05 03:17:34,805 Segmentron INFO: Using 2 GPUs
+2023-09-05 03:17:34,806 Segmentron INFO: Namespace(config_file='configs/trans10kv2/pvt_medium_FPT.yaml', device='cuda', distributed=True, input_img='/home/MichaelWang/Test_Images', local_rank=0, log_iter=10, no_cuda=False, num_gpus=2, opts=[], resume=None, skip_val=False, test=False, val_epoch=1, vis=False)
+2023-09-05 03:17:34,807 Segmentron INFO: {
+        "SEED": 1024,
+        "TIME_STAMP": "2023-09-05-03-17",
+        "ROOT_PATH": "/home/MichaelWang/Trans4Trans",
+        "PHASE": "test",
+        "DATASET": {
+                "NAME": "transparent11",
+                "MEAN": [
+                        0.485,
+                        0.456,
+                        0.406
+                ],
+                "STD": [
+                        0.229,
+                        0.224,
+                        0.225
+                ],
+                "IGNORE_INDEX": -1,
+                "WORKERS": 8,
+                "MODE": "testval"
+        },
+        "AUG": {
+                "MIRROR": true,
+                "BLUR_PROB": 0.0,
+                "BLUR_RADIUS": 0.0,
+                "COLOR_JITTER": null,
+                "CROP": false
+        },
+        "TRAIN": {
+                "EPOCHS": 100,
+                "ITERS": 40000,
+                "BATCH_SIZE": 4,
+                "CROP_SIZE": [
+                        512,
+                        512
+                ],
+                "BASE_SIZE": 512,
+                "MODEL_SAVE_DIR": "workdirs/trans10kv2/pvt_medium_FPT",
+                "LOG_SAVE_DIR": "workdirs/",
+                "PRETRAINED_MODEL_PATH": "",
+                "BACKBONE_PRETRAINED": true,
+                "BACKBONE_PRETRAINED_PATH": "pretrained/pvt_medium.pth",
+                "RESUME_MODEL_PATH": "",
+                "SYNC_BATCH_NORM": true,
+                "SNAPSHOT_EPOCH": 1,
+                "APEX": true
+        },
+        "SOLVER": {
+                "LR": 0.0001,
+                "OPTIMIZER": "adamw",
+                "EPSILON": 1e-08,
+                "MOMENTUM": 0.9,
+                "WEIGHT_DECAY": 0.0001,
+                "DECODER_LR_FACTOR": 10.0,
+                "LR_SCHEDULER": "poly",
+                "POLY": {
+                        "POWER": 0.9
+                },
+                "STEP": {
+                        "GAMMA": 0.1,
+                        "DECAY_EPOCH": [
+                                10,
+                                20
+                        ]
+                },
+                "WARMUP": {
+                        "EPOCHS": 0.0,
+                        "FACTOR": 0.3333333333333333,
+                        "METHOD": "linear"
+                },
+                "OHEM": false,
+                "AUX": false,
+                "AUX_WEIGHT": 0.4,
+                "LOSS_NAME": ""
+        },
+        "TEST": {
+                "TEST_MODEL_PATH": "/home/MichaelWang/Trans4Trans/weights_pretrained/Trans10K/trans4trans_medium.pth",
+                "BATCH_SIZE": 4,
+                "CROP_SIZE": [
+                        512,
+                        512
+                ],
+                "SCALES": [
+                        1.0
+                ],
+                "FLIP": false
+        },
+        "VISUAL": {
+                "OUTPUT_DIR": "../runs/visual/"
+        },
+        "MODEL": {
+                "MODEL_NAME": "PVT_FPT",
+                "BACKBONE": "pvt_medium",
+                "BACKBONE_SCALE": 1.0,
+                "MULTI_LOSS_WEIGHT": [
+                        1.0
+                ],
+                "DEFAULT_GROUP_NUMBER": 32,
+                "DEFAULT_EPSILON": 1e-05,
+                "BN_TYPE": "BN",
+                "BN_EPS_FOR_ENCODER": null,
+                "BN_EPS_FOR_DECODER": null,
+                "OUTPUT_STRIDE": 16,
+                "BN_MOMENTUM": null,
+                "EMB_CHANNELS": 64,
+                "DANET": {
+                        "MULTI_DILATION": null,
+                        "MULTI_GRID": false
+                },
+                "DEEPLABV3_PLUS": {
+                        "USE_ASPP": true,
+                        "ENABLE_DECODER": true,
+                        "ASPP_WITH_SEP_CONV": true,
+                        "DECODER_USE_SEP_CONV": true
+                },
+                "OCNet": {
+                        "OC_ARCH": "base"
+                },
+                "ENCNET": {
+                        "SE_LOSS": true,
+                        "SE_WEIGHT": 0.2,
+                        "LATERAL": true
+                },
+                "CCNET": {
+                        "RECURRENCE": 2
+                },
+                "CGNET": {
+                        "STAGE2_BLOCK_NUM": 3,
+                        "STAGE3_BLOCK_NUM": 21
+                },
+                "POINTREND": {
+                        "BASEMODEL": "DeepLabV3_Plus"
+                },
+                "HRNET": {
+                        "PRETRAINED_LAYERS": [
+                                "*"
+                        ],
+                        "STEM_INPLANES": 64,
+                        "FINAL_CONV_KERNEL": 1,
+                        "WITH_HEAD": true,
+                        "STAGE1": {
+                                "NUM_MODULES": 1,
+                                "NUM_BRANCHES": 1,
+                                "NUM_BLOCKS": [
+                                        1
+                                ],
+                                "NUM_CHANNELS": [
+                                        32
+                                ],
+                                "BLOCK": "BOTTLENECK",
+                                "FUSE_METHOD": "SUM"
+                        },
+                        "STAGE2": {
+                                "NUM_MODULES": 1,
+                                "NUM_BRANCHES": 2,
+                                "NUM_BLOCKS": [
+                                        4,
+                                        4
+                                ],
+                                "NUM_CHANNELS": [
+                                        32,
+                                        64
+                                ],
+                                "BLOCK": "BASIC",
+                                "FUSE_METHOD": "SUM"
+                        },
+                        "STAGE3": {
+                                "NUM_MODULES": 1,
+                                "NUM_BRANCHES": 3,
+                                "NUM_BLOCKS": [
+                                        4,
+                                        4,
+                                        4
+                                ],
+                                "NUM_CHANNELS": [
+                                        32,
+                                        64,
+                                        128
+                                ],
+                                "BLOCK": "BASIC",
+                                "FUSE_METHOD": "SUM"
+                        },
+                        "STAGE4": {
+                                "NUM_MODULES": 1,
+                                "NUM_BRANCHES": 4,
+                                "NUM_BLOCKS": [
+                                        4,
+                                        4,
+                                        4,
+                                        4
+                                ],
+                                "NUM_CHANNELS": [
+                                        32,
+                                        64,
+                                        128,
+                                        256
+                                ],
+                                "BLOCK": "BASIC",
+                                "FUSE_METHOD": "SUM"
+                        }
+                },
+                "TRANSLAB": {
+                        "BOUNDARY_WEIGHT": 5
+                },
+                "TRANS4TRANS": {
+                        "embed_dim": 256,
+                        "depth": 4,
+                        "num_heads": 8,
+                        "mlp_ratio": 3.0,
+                        "hid_dim": 64
+                }
+        }
+}
+2023-09-05 03:17:34,839 Segmentron INFO: Found 4428 images in the folder /home/MichaelWang/Trans4Trans/datasets/transparent/Trans10K_cls12
+2023-09-05 03:17:35,350 Segmentron INFO: load test model from /home/MichaelWang/Trans4Trans/weights_pretrained/Trans10K/trans4trans_medium.pth
+2023-09-05 03:17:35,872 Segmentron INFO: <All keys matched successfully>
+2023-09-05 03:17:41,332 Segmentron INFO: Start validation, Total sample: 554
+2023-09-05 03:17:43,328 Segmentron INFO: Sample: 1, validation pixAcc: 97.441, mIoU: 32.240
+2023-09-05 03:17:43,425 Segmentron INFO: Sample: 2, validation pixAcc: 97.149, mIoU: 44.461
+2023-09-05 03:17:43,512 Segmentron INFO: Sample: 3, validation pixAcc: 97.390, mIoU: 52.872
+2023-09-05 03:17:43,602 Segmentron INFO: Sample: 4, validation pixAcc: 95.082, mIoU: 60.044
+2023-09-05 03:17:43,693 Segmentron INFO: Sample: 5, validation pixAcc: 95.385, mIoU: 64.172
+2023-09-05 03:17:43,784 Segmentron INFO: Sample: 6, validation pixAcc: 95.134, mIoU: 70.945
+2023-09-05 03:17:43,871 Segmentron INFO: Sample: 7, validation pixAcc: 95.236, mIoU: 71.038
+2023-09-05 03:17:43,961 Segmentron INFO: Sample: 8, validation pixAcc: 94.055, mIoU: 68.312
+2023-09-05 03:17:44,052 Segmentron INFO: Sample: 9, validation pixAcc: 94.200, mIoU: 70.416
+2023-09-05 03:17:44,140 Segmentron INFO: Sample: 10, validation pixAcc: 94.437, mIoU: 71.467
+2023-09-05 03:17:44,228 Segmentron INFO: Sample: 11, validation pixAcc: 94.268, mIoU: 71.522
+2023-09-05 03:17:44,316 Segmentron INFO: Sample: 12, validation pixAcc: 94.497, mIoU: 74.377
+2023-09-05 03:17:44,404 Segmentron INFO: Sample: 13, validation pixAcc: 94.742, mIoU: 74.604
+2023-09-05 03:17:44,496 Segmentron INFO: Sample: 14, validation pixAcc: 94.327, mIoU: 73.444
+2023-09-05 03:17:44,584 Segmentron INFO: Sample: 15, validation pixAcc: 93.992, mIoU: 70.543
+2023-09-05 03:17:44,672 Segmentron INFO: Sample: 16, validation pixAcc: 93.835, mIoU: 68.537
+2023-09-05 03:17:44,760 Segmentron INFO: Sample: 17, validation pixAcc: 93.739, mIoU: 67.719
+2023-09-05 03:17:44,848 Segmentron INFO: Sample: 18, validation pixAcc: 93.968, mIoU: 68.181
+2023-09-05 03:17:44,936 Segmentron INFO: Sample: 19, validation pixAcc: 93.754, mIoU: 68.439
+2023-09-05 03:17:45,026 Segmentron INFO: Sample: 20, validation pixAcc: 93.862, mIoU: 69.052
+2023-09-05 03:17:45,113 Segmentron INFO: Sample: 21, validation pixAcc: 93.948, mIoU: 68.461
+2023-09-05 03:17:45,204 Segmentron INFO: Sample: 22, validation pixAcc: 93.987, mIoU: 68.595
+2023-09-05 03:17:45,292 Segmentron INFO: Sample: 23, validation pixAcc: 94.217, mIoU: 69.508
+2023-09-05 03:17:45,380 Segmentron INFO: Sample: 24, validation pixAcc: 94.205, mIoU: 69.899
+2023-09-05 03:17:45,468 Segmentron INFO: Sample: 25, validation pixAcc: 94.341, mIoU: 70.016
+2023-09-05 03:17:45,556 Segmentron INFO: Sample: 26, validation pixAcc: 94.359, mIoU: 69.874
+2023-09-05 03:17:45,644 Segmentron INFO: Sample: 27, validation pixAcc: 94.341, mIoU: 69.669
+2023-09-05 03:17:45,734 Segmentron INFO: Sample: 28, validation pixAcc: 94.383, mIoU: 69.652
+2023-09-05 03:17:45,822 Segmentron INFO: Sample: 29, validation pixAcc: 94.442, mIoU: 69.395
+2023-09-05 03:17:45,909 Segmentron INFO: Sample: 30, validation pixAcc: 94.426, mIoU: 69.557
+2023-09-05 03:17:45,997 Segmentron INFO: Sample: 31, validation pixAcc: 94.296, mIoU: 68.551
+2023-09-05 03:17:46,086 Segmentron INFO: Sample: 32, validation pixAcc: 94.172, mIoU: 67.864
+2023-09-05 03:17:46,174 Segmentron INFO: Sample: 33, validation pixAcc: 94.214, mIoU: 68.276
+2023-09-05 03:17:46,262 Segmentron INFO: Sample: 34, validation pixAcc: 94.270, mIoU: 69.463
+2023-09-05 03:17:46,354 Segmentron INFO: Sample: 35, validation pixAcc: 94.408, mIoU: 69.789
+2023-09-05 03:17:46,443 Segmentron INFO: Sample: 36, validation pixAcc: 94.538, mIoU: 70.770
+2023-09-05 03:17:46,538 Segmentron INFO: Sample: 37, validation pixAcc: 94.548, mIoU: 70.817
+2023-09-05 03:17:46,630 Segmentron INFO: Sample: 38, validation pixAcc: 94.558, mIoU: 70.868
+2023-09-05 03:17:46,722 Segmentron INFO: Sample: 39, validation pixAcc: 94.497, mIoU: 70.888
+2023-09-05 03:17:46,812 Segmentron INFO: Sample: 40, validation pixAcc: 94.572, mIoU: 71.536
+2023-09-05 03:17:46,900 Segmentron INFO: Sample: 41, validation pixAcc: 94.485, mIoU: 71.278
+2023-09-05 03:17:46,991 Segmentron INFO: Sample: 42, validation pixAcc: 94.562, mIoU: 71.538
+2023-09-05 03:17:47,083 Segmentron INFO: Sample: 43, validation pixAcc: 94.627, mIoU: 71.838
+2023-09-05 03:17:47,171 Segmentron INFO: Sample: 44, validation pixAcc: 94.694, mIoU: 71.883
+2023-09-05 03:17:47,258 Segmentron INFO: Sample: 45, validation pixAcc: 94.615, mIoU: 71.573
+2023-09-05 03:17:47,346 Segmentron INFO: Sample: 46, validation pixAcc: 94.694, mIoU: 71.646
+2023-09-05 03:17:47,438 Segmentron INFO: Sample: 47, validation pixAcc: 94.683, mIoU: 71.459
+2023-09-05 03:17:47,525 Segmentron INFO: Sample: 48, validation pixAcc: 94.610, mIoU: 71.332
+2023-09-05 03:17:47,613 Segmentron INFO: Sample: 49, validation pixAcc: 94.639, mIoU: 71.956
+2023-09-05 03:17:47,700 Segmentron INFO: Sample: 50, validation pixAcc: 94.595, mIoU: 71.881
+2023-09-05 03:17:47,788 Segmentron INFO: Sample: 51, validation pixAcc: 94.550, mIoU: 71.894
+2023-09-05 03:17:47,879 Segmentron INFO: Sample: 52, validation pixAcc: 94.554, mIoU: 71.807
+2023-09-05 03:17:47,966 Segmentron INFO: Sample: 53, validation pixAcc: 94.543, mIoU: 71.861
+2023-09-05 03:17:48,056 Segmentron INFO: Sample: 54, validation pixAcc: 94.405, mIoU: 70.818
+2023-09-05 03:17:48,144 Segmentron INFO: Sample: 55, validation pixAcc: 94.356, mIoU: 70.903
+2023-09-05 03:17:48,236 Segmentron INFO: Sample: 56, validation pixAcc: 94.349, mIoU: 71.220
+2023-09-05 03:17:48,324 Segmentron INFO: Sample: 57, validation pixAcc: 94.379, mIoU: 71.250
+2023-09-05 03:17:48,415 Segmentron INFO: Sample: 58, validation pixAcc: 94.330, mIoU: 70.763
+2023-09-05 03:17:48,503 Segmentron INFO: Sample: 59, validation pixAcc: 94.390, mIoU: 71.068
+2023-09-05 03:17:48,590 Segmentron INFO: Sample: 60, validation pixAcc: 94.445, mIoU: 71.808
+2023-09-05 03:17:48,678 Segmentron INFO: Sample: 61, validation pixAcc: 94.490, mIoU: 72.006
+2023-09-05 03:17:48,765 Segmentron INFO: Sample: 62, validation pixAcc: 94.476, mIoU: 71.789
+2023-09-05 03:17:48,853 Segmentron INFO: Sample: 63, validation pixAcc: 94.530, mIoU: 72.204
+2023-09-05 03:17:48,940 Segmentron INFO: Sample: 64, validation pixAcc: 94.440, mIoU: 71.859
+2023-09-05 03:17:49,028 Segmentron INFO: Sample: 65, validation pixAcc: 94.431, mIoU: 72.109
+2023-09-05 03:17:49,119 Segmentron INFO: Sample: 66, validation pixAcc: 94.430, mIoU: 72.129
+2023-09-05 03:17:49,206 Segmentron INFO: Sample: 67, validation pixAcc: 94.451, mIoU: 72.067
+2023-09-05 03:17:49,294 Segmentron INFO: Sample: 68, validation pixAcc: 94.403, mIoU: 71.942
+2023-09-05 03:17:49,382 Segmentron INFO: Sample: 69, validation pixAcc: 94.428, mIoU: 72.180
+2023-09-05 03:17:49,470 Segmentron INFO: Sample: 70, validation pixAcc: 94.433, mIoU: 72.228
+2023-09-05 03:17:49,563 Segmentron INFO: Sample: 71, validation pixAcc: 94.468, mIoU: 72.234
+2023-09-05 03:17:49,651 Segmentron INFO: Sample: 72, validation pixAcc: 94.524, mIoU: 72.470
+2023-09-05 03:17:49,744 Segmentron INFO: Sample: 73, validation pixAcc: 94.553, mIoU: 72.626
+2023-09-05 03:17:49,831 Segmentron INFO: Sample: 74, validation pixAcc: 94.523, mIoU: 72.606
+2023-09-05 03:17:49,922 Segmentron INFO: Sample: 75, validation pixAcc: 94.440, mIoU: 71.277
+2023-09-05 03:17:50,009 Segmentron INFO: Sample: 76, validation pixAcc: 94.386, mIoU: 71.046
+2023-09-05 03:17:50,098 Segmentron INFO: Sample: 77, validation pixAcc: 94.369, mIoU: 71.068
+2023-09-05 03:17:50,185 Segmentron INFO: Sample: 78, validation pixAcc: 94.372, mIoU: 71.467
+2023-09-05 03:17:50,273 Segmentron INFO: Sample: 79, validation pixAcc: 94.409, mIoU: 71.579
+2023-09-05 03:17:50,363 Segmentron INFO: Sample: 80, validation pixAcc: 94.396, mIoU: 71.591
+2023-09-05 03:17:50,451 Segmentron INFO: Sample: 81, validation pixAcc: 94.439, mIoU: 71.716
+2023-09-05 03:17:50,541 Segmentron INFO: Sample: 82, validation pixAcc: 94.291, mIoU: 70.453
+2023-09-05 03:17:50,629 Segmentron INFO: Sample: 83, validation pixAcc: 94.331, mIoU: 70.604
+2023-09-05 03:17:50,716 Segmentron INFO: Sample: 84, validation pixAcc: 94.378, mIoU: 70.647
+2023-09-05 03:17:50,804 Segmentron INFO: Sample: 85, validation pixAcc: 94.418, mIoU: 70.728
+2023-09-05 03:17:50,892 Segmentron INFO: Sample: 86, validation pixAcc: 94.418, mIoU: 70.759
+2023-09-05 03:17:50,980 Segmentron INFO: Sample: 87, validation pixAcc: 94.443, mIoU: 70.899
+2023-09-05 03:17:51,071 Segmentron INFO: Sample: 88, validation pixAcc: 94.491, mIoU: 71.020
+2023-09-05 03:17:51,159 Segmentron INFO: Sample: 89, validation pixAcc: 94.506, mIoU: 71.149
+2023-09-05 03:17:51,247 Segmentron INFO: Sample: 90, validation pixAcc: 94.430, mIoU: 70.161
+2023-09-05 03:17:51,335 Segmentron INFO: Sample: 91, validation pixAcc: 94.473, mIoU: 70.308
+2023-09-05 03:17:51,422 Segmentron INFO: Sample: 92, validation pixAcc: 94.501, mIoU: 70.417
+2023-09-05 03:17:51,514 Segmentron INFO: Sample: 93, validation pixAcc: 94.455, mIoU: 70.329
+2023-09-05 03:17:51,601 Segmentron INFO: Sample: 94, validation pixAcc: 94.467, mIoU: 70.461
+2023-09-05 03:17:51,689 Segmentron INFO: Sample: 95, validation pixAcc: 94.475, mIoU: 70.786
+2023-09-05 03:17:51,777 Segmentron INFO: Sample: 96, validation pixAcc: 94.359, mIoU: 70.202
+2023-09-05 03:17:51,864 Segmentron INFO: Sample: 97, validation pixAcc: 94.388, mIoU: 70.240
+2023-09-05 03:17:51,953 Segmentron INFO: Sample: 98, validation pixAcc: 94.413, mIoU: 70.331
+2023-09-05 03:17:52,043 Segmentron INFO: Sample: 99, validation pixAcc: 94.409, mIoU: 70.311
+2023-09-05 03:17:52,130 Segmentron INFO: Sample: 100, validation pixAcc: 94.455, mIoU: 70.329
+2023-09-05 03:17:52,217 Segmentron INFO: Sample: 101, validation pixAcc: 94.501, mIoU: 70.563
+2023-09-05 03:17:52,305 Segmentron INFO: Sample: 102, validation pixAcc: 94.530, mIoU: 70.603
+2023-09-05 03:17:52,396 Segmentron INFO: Sample: 103, validation pixAcc: 94.524, mIoU: 70.712
+2023-09-05 03:17:52,483 Segmentron INFO: Sample: 104, validation pixAcc: 94.547, mIoU: 70.784
+2023-09-05 03:17:52,571 Segmentron INFO: Sample: 105, validation pixAcc: 94.508, mIoU: 70.447
+2023-09-05 03:17:52,668 Segmentron INFO: Sample: 106, validation pixAcc: 94.493, mIoU: 70.314
+2023-09-05 03:17:52,755 Segmentron INFO: Sample: 107, validation pixAcc: 94.530, mIoU: 70.438
+2023-09-05 03:17:52,843 Segmentron INFO: Sample: 108, validation pixAcc: 94.534, mIoU: 70.425
+2023-09-05 03:17:52,931 Segmentron INFO: Sample: 109, validation pixAcc: 94.572, mIoU: 70.456
+2023-09-05 03:17:53,019 Segmentron INFO: Sample: 110, validation pixAcc: 94.575, mIoU: 70.548
+2023-09-05 03:17:53,107 Segmentron INFO: Sample: 111, validation pixAcc: 94.598, mIoU: 70.525
+2023-09-05 03:17:53,195 Segmentron INFO: Sample: 112, validation pixAcc: 94.631, mIoU: 70.670
+2023-09-05 03:17:53,283 Segmentron INFO: Sample: 113, validation pixAcc: 94.606, mIoU: 70.568
+2023-09-05 03:17:53,371 Segmentron INFO: Sample: 114, validation pixAcc: 94.620, mIoU: 70.635
+2023-09-05 03:17:53,459 Segmentron INFO: Sample: 115, validation pixAcc: 94.621, mIoU: 70.747
+2023-09-05 03:17:53,546 Segmentron INFO: Sample: 116, validation pixAcc: 94.601, mIoU: 70.628
+2023-09-05 03:17:53,634 Segmentron INFO: Sample: 117, validation pixAcc: 94.640, mIoU: 70.750
+2023-09-05 03:17:53,722 Segmentron INFO: Sample: 118, validation pixAcc: 94.644, mIoU: 70.786
+2023-09-05 03:17:53,809 Segmentron INFO: Sample: 119, validation pixAcc: 94.601, mIoU: 70.867
+2023-09-05 03:17:53,900 Segmentron INFO: Sample: 120, validation pixAcc: 94.604, mIoU: 71.139
+2023-09-05 03:17:53,987 Segmentron INFO: Sample: 121, validation pixAcc: 94.613, mIoU: 71.975
+2023-09-05 03:17:54,077 Segmentron INFO: Sample: 122, validation pixAcc: 94.627, mIoU: 72.059
+2023-09-05 03:17:54,164 Segmentron INFO: Sample: 123, validation pixAcc: 94.655, mIoU: 72.226
+2023-09-05 03:17:54,252 Segmentron INFO: Sample: 124, validation pixAcc: 94.662, mIoU: 72.253
+2023-09-05 03:17:54,340 Segmentron INFO: Sample: 125, validation pixAcc: 94.652, mIoU: 72.338
+2023-09-05 03:17:54,430 Segmentron INFO: Sample: 126, validation pixAcc: 94.631, mIoU: 72.281
+2023-09-05 03:17:54,518 Segmentron INFO: Sample: 127, validation pixAcc: 94.633, mIoU: 72.250
+2023-09-05 03:17:54,606 Segmentron INFO: Sample: 128, validation pixAcc: 94.616, mIoU: 72.059
+2023-09-05 03:17:54,700 Segmentron INFO: Sample: 129, validation pixAcc: 94.531, mIoU: 70.799
+2023-09-05 03:17:54,788 Segmentron INFO: Sample: 130, validation pixAcc: 94.485, mIoU: 70.776
+2023-09-05 03:17:54,880 Segmentron INFO: Sample: 131, validation pixAcc: 94.490, mIoU: 71.004
+2023-09-05 03:17:54,971 Segmentron INFO: Sample: 132, validation pixAcc: 94.516, mIoU: 71.095
+2023-09-05 03:17:55,059 Segmentron INFO: Sample: 133, validation pixAcc: 94.526, mIoU: 71.090
+2023-09-05 03:17:55,147 Segmentron INFO: Sample: 134, validation pixAcc: 94.532, mIoU: 71.069
+2023-09-05 03:17:55,235 Segmentron INFO: Sample: 135, validation pixAcc: 94.536, mIoU: 70.946
+2023-09-05 03:17:55,324 Segmentron INFO: Sample: 136, validation pixAcc: 94.502, mIoU: 71.017
+2023-09-05 03:17:55,411 Segmentron INFO: Sample: 137, validation pixAcc: 94.514, mIoU: 71.062
+2023-09-05 03:17:55,502 Segmentron INFO: Sample: 138, validation pixAcc: 94.441, mIoU: 70.823
+2023-09-05 03:17:55,594 Segmentron INFO: Sample: 139, validation pixAcc: 94.450, mIoU: 70.855
+2023-09-05 03:17:55,682 Segmentron INFO: Sample: 140, validation pixAcc: 94.463, mIoU: 70.839
+2023-09-05 03:17:55,773 Segmentron INFO: Sample: 141, validation pixAcc: 94.476, mIoU: 70.927
+2023-09-05 03:17:55,861 Segmentron INFO: Sample: 142, validation pixAcc: 94.486, mIoU: 70.946
+2023-09-05 03:17:55,952 Segmentron INFO: Sample: 143, validation pixAcc: 94.447, mIoU: 70.889
+2023-09-05 03:17:56,040 Segmentron INFO: Sample: 144, validation pixAcc: 94.465, mIoU: 70.901
+2023-09-05 03:17:56,129 Segmentron INFO: Sample: 145, validation pixAcc: 94.497, mIoU: 71.148
+2023-09-05 03:17:56,218 Segmentron INFO: Sample: 146, validation pixAcc: 94.496, mIoU: 71.306
+2023-09-05 03:17:56,307 Segmentron INFO: Sample: 147, validation pixAcc: 94.514, mIoU: 71.628
+2023-09-05 03:17:56,395 Segmentron INFO: Sample: 148, validation pixAcc: 94.510, mIoU: 71.673
+2023-09-05 03:17:56,482 Segmentron INFO: Sample: 149, validation pixAcc: 94.494, mIoU: 71.696
+2023-09-05 03:17:56,572 Segmentron INFO: Sample: 150, validation pixAcc: 94.504, mIoU: 71.797
+2023-09-05 03:17:56,665 Segmentron INFO: Sample: 151, validation pixAcc: 94.512, mIoU: 71.821
+2023-09-05 03:17:56,759 Segmentron INFO: Sample: 152, validation pixAcc: 94.511, mIoU: 71.771
+2023-09-05 03:17:56,846 Segmentron INFO: Sample: 153, validation pixAcc: 94.479, mIoU: 71.552
+2023-09-05 03:17:56,934 Segmentron INFO: Sample: 154, validation pixAcc: 94.473, mIoU: 71.572
+2023-09-05 03:17:57,022 Segmentron INFO: Sample: 155, validation pixAcc: 94.484, mIoU: 71.559
+2023-09-05 03:17:57,110 Segmentron INFO: Sample: 156, validation pixAcc: 94.481, mIoU: 71.742
+2023-09-05 03:17:57,197 Segmentron INFO: Sample: 157, validation pixAcc: 94.506, mIoU: 71.955
+2023-09-05 03:17:57,286 Segmentron INFO: Sample: 158, validation pixAcc: 94.523, mIoU: 72.000
+2023-09-05 03:17:57,380 Segmentron INFO: Sample: 159, validation pixAcc: 94.537, mIoU: 72.054
+2023-09-05 03:17:57,468 Segmentron INFO: Sample: 160, validation pixAcc: 94.554, mIoU: 72.134
+2023-09-05 03:17:57,555 Segmentron INFO: Sample: 161, validation pixAcc: 94.560, mIoU: 72.146
+2023-09-05 03:17:57,646 Segmentron INFO: Sample: 162, validation pixAcc: 94.560, mIoU: 72.267
+2023-09-05 03:17:57,733 Segmentron INFO: Sample: 163, validation pixAcc: 94.538, mIoU: 71.909
+2023-09-05 03:17:57,821 Segmentron INFO: Sample: 164, validation pixAcc: 94.561, mIoU: 71.940
+2023-09-05 03:17:57,909 Segmentron INFO: Sample: 165, validation pixAcc: 94.522, mIoU: 71.820
+2023-09-05 03:17:57,997 Segmentron INFO: Sample: 166, validation pixAcc: 94.481, mIoU: 72.024
+2023-09-05 03:17:58,084 Segmentron INFO: Sample: 167, validation pixAcc: 94.486, mIoU: 71.997
+2023-09-05 03:17:58,172 Segmentron INFO: Sample: 168, validation pixAcc: 94.478, mIoU: 72.000
+2023-09-05 03:17:58,259 Segmentron INFO: Sample: 169, validation pixAcc: 94.472, mIoU: 72.081
+2023-09-05 03:17:58,347 Segmentron INFO: Sample: 170, validation pixAcc: 94.455, mIoU: 72.049
+2023-09-05 03:17:58,435 Segmentron INFO: Sample: 171, validation pixAcc: 94.482, mIoU: 72.150
+2023-09-05 03:17:58,523 Segmentron INFO: Sample: 172, validation pixAcc: 94.497, mIoU: 72.233
+2023-09-05 03:17:58,617 Segmentron INFO: Sample: 173, validation pixAcc: 94.473, mIoU: 72.115
+2023-09-05 03:17:58,704 Segmentron INFO: Sample: 174, validation pixAcc: 94.481, mIoU: 72.209
+2023-09-05 03:17:58,792 Segmentron INFO: Sample: 175, validation pixAcc: 94.457, mIoU: 72.174
+2023-09-05 03:17:58,886 Segmentron INFO: Sample: 176, validation pixAcc: 94.472, mIoU: 72.196
+2023-09-05 03:17:58,980 Segmentron INFO: Sample: 177, validation pixAcc: 94.466, mIoU: 72.232
+2023-09-05 03:17:59,068 Segmentron INFO: Sample: 178, validation pixAcc: 94.482, mIoU: 72.289
+2023-09-05 03:17:59,156 Segmentron INFO: Sample: 179, validation pixAcc: 94.494, mIoU: 72.349
+2023-09-05 03:17:59,245 Segmentron INFO: Sample: 180, validation pixAcc: 94.505, mIoU: 72.360
+2023-09-05 03:17:59,333 Segmentron INFO: Sample: 181, validation pixAcc: 94.529, mIoU: 72.406
+2023-09-05 03:17:59,427 Segmentron INFO: Sample: 182, validation pixAcc: 94.531, mIoU: 72.466
+2023-09-05 03:17:59,514 Segmentron INFO: Sample: 183, validation pixAcc: 94.551, mIoU: 72.555
+2023-09-05 03:17:59,603 Segmentron INFO: Sample: 184, validation pixAcc: 94.538, mIoU: 72.478
+2023-09-05 03:17:59,690 Segmentron INFO: Sample: 185, validation pixAcc: 94.510, mIoU: 72.089
+2023-09-05 03:17:59,777 Segmentron INFO: Sample: 186, validation pixAcc: 94.527, mIoU: 72.247
+2023-09-05 03:17:59,865 Segmentron INFO: Sample: 187, validation pixAcc: 94.538, mIoU: 72.250
+2023-09-05 03:17:59,952 Segmentron INFO: Sample: 188, validation pixAcc: 94.548, mIoU: 72.310
+2023-09-05 03:18:00,042 Segmentron INFO: Sample: 189, validation pixAcc: 94.567, mIoU: 72.353
+2023-09-05 03:18:00,130 Segmentron INFO: Sample: 190, validation pixAcc: 94.572, mIoU: 72.351
+2023-09-05 03:18:00,221 Segmentron INFO: Sample: 191, validation pixAcc: 94.564, mIoU: 72.319
+2023-09-05 03:18:00,309 Segmentron INFO: Sample: 192, validation pixAcc: 94.538, mIoU: 72.201
+2023-09-05 03:18:00,399 Segmentron INFO: Sample: 193, validation pixAcc: 94.557, mIoU: 72.238
+2023-09-05 03:18:00,486 Segmentron INFO: Sample: 194, validation pixAcc: 94.577, mIoU: 72.331
+2023-09-05 03:18:00,574 Segmentron INFO: Sample: 195, validation pixAcc: 94.555, mIoU: 72.241
+2023-09-05 03:18:00,662 Segmentron INFO: Sample: 196, validation pixAcc: 94.536, mIoU: 72.250
+2023-09-05 03:18:00,751 Segmentron INFO: Sample: 197, validation pixAcc: 94.530, mIoU: 72.162
+2023-09-05 03:18:00,842 Segmentron INFO: Sample: 198, validation pixAcc: 94.549, mIoU: 72.214
+2023-09-05 03:18:00,932 Segmentron INFO: Sample: 199, validation pixAcc: 94.561, mIoU: 72.260
+2023-09-05 03:18:01,020 Segmentron INFO: Sample: 200, validation pixAcc: 94.573, mIoU: 72.186
+2023-09-05 03:18:01,108 Segmentron INFO: Sample: 201, validation pixAcc: 94.574, mIoU: 72.265
+2023-09-05 03:18:01,196 Segmentron INFO: Sample: 202, validation pixAcc: 94.561, mIoU: 71.555
+2023-09-05 03:18:01,284 Segmentron INFO: Sample: 203, validation pixAcc: 94.566, mIoU: 71.724
+2023-09-05 03:18:01,371 Segmentron INFO: Sample: 204, validation pixAcc: 94.575, mIoU: 71.784
+2023-09-05 03:18:01,459 Segmentron INFO: Sample: 205, validation pixAcc: 94.573, mIoU: 71.824
+2023-09-05 03:18:01,547 Segmentron INFO: Sample: 206, validation pixAcc: 94.572, mIoU: 71.829
+2023-09-05 03:18:01,634 Segmentron INFO: Sample: 207, validation pixAcc: 94.589, mIoU: 71.917
+2023-09-05 03:18:01,722 Segmentron INFO: Sample: 208, validation pixAcc: 94.596, mIoU: 71.964
+2023-09-05 03:18:01,812 Segmentron INFO: Sample: 209, validation pixAcc: 94.597, mIoU: 71.979
+2023-09-05 03:18:01,901 Segmentron INFO: Sample: 210, validation pixAcc: 94.591, mIoU: 71.920
+2023-09-05 03:18:01,988 Segmentron INFO: Sample: 211, validation pixAcc: 94.607, mIoU: 71.936
+2023-09-05 03:18:02,076 Segmentron INFO: Sample: 212, validation pixAcc: 94.600, mIoU: 71.901
+2023-09-05 03:18:02,163 Segmentron INFO: Sample: 213, validation pixAcc: 94.589, mIoU: 71.937
+2023-09-05 03:18:02,251 Segmentron INFO: Sample: 214, validation pixAcc: 94.600, mIoU: 72.023
+2023-09-05 03:18:02,339 Segmentron INFO: Sample: 215, validation pixAcc: 94.605, mIoU: 72.101
+2023-09-05 03:18:02,428 Segmentron INFO: Sample: 216, validation pixAcc: 94.610, mIoU: 72.199
+2023-09-05 03:18:02,517 Segmentron INFO: Sample: 217, validation pixAcc: 94.614, mIoU: 72.322
+2023-09-05 03:18:02,604 Segmentron INFO: Sample: 218, validation pixAcc: 94.617, mIoU: 72.382
+2023-09-05 03:18:02,693 Segmentron INFO: Sample: 219, validation pixAcc: 94.636, mIoU: 72.411
+2023-09-05 03:18:02,780 Segmentron INFO: Sample: 220, validation pixAcc: 94.604, mIoU: 72.306
+2023-09-05 03:18:02,868 Segmentron INFO: Sample: 221, validation pixAcc: 94.618, mIoU: 72.329
+2023-09-05 03:18:02,960 Segmentron INFO: Sample: 222, validation pixAcc: 94.601, mIoU: 72.233
+2023-09-05 03:18:03,048 Segmentron INFO: Sample: 223, validation pixAcc: 94.614, mIoU: 72.291
+2023-09-05 03:18:03,141 Segmentron INFO: Sample: 224, validation pixAcc: 94.612, mIoU: 72.204
+2023-09-05 03:18:03,228 Segmentron INFO: Sample: 225, validation pixAcc: 94.623, mIoU: 72.219
+2023-09-05 03:18:03,316 Segmentron INFO: Sample: 226, validation pixAcc: 94.622, mIoU: 72.297
+2023-09-05 03:18:03,404 Segmentron INFO: Sample: 227, validation pixAcc: 94.636, mIoU: 72.450
+2023-09-05 03:18:03,492 Segmentron INFO: Sample: 228, validation pixAcc: 94.624, mIoU: 72.541
+2023-09-05 03:18:03,580 Segmentron INFO: Sample: 229, validation pixAcc: 94.632, mIoU: 72.576
+2023-09-05 03:18:03,668 Segmentron INFO: Sample: 230, validation pixAcc: 94.636, mIoU: 72.587
+2023-09-05 03:18:03,757 Segmentron INFO: Sample: 231, validation pixAcc: 94.655, mIoU: 72.603
+2023-09-05 03:18:03,845 Segmentron INFO: Sample: 232, validation pixAcc: 94.665, mIoU: 72.638
+2023-09-05 03:18:03,933 Segmentron INFO: Sample: 233, validation pixAcc: 94.680, mIoU: 72.834
+2023-09-05 03:18:04,022 Segmentron INFO: Sample: 234, validation pixAcc: 94.699, mIoU: 72.882
+2023-09-05 03:18:04,109 Segmentron INFO: Sample: 235, validation pixAcc: 94.711, mIoU: 72.931
+2023-09-05 03:18:04,202 Segmentron INFO: Sample: 236, validation pixAcc: 94.707, mIoU: 72.848
+2023-09-05 03:18:04,289 Segmentron INFO: Sample: 237, validation pixAcc: 94.674, mIoU: 72.590
+2023-09-05 03:18:04,376 Segmentron INFO: Sample: 238, validation pixAcc: 94.674, mIoU: 72.472
+2023-09-05 03:18:04,464 Segmentron INFO: Sample: 239, validation pixAcc: 94.685, mIoU: 72.745
+2023-09-05 03:18:04,552 Segmentron INFO: Sample: 240, validation pixAcc: 94.694, mIoU: 72.746
+2023-09-05 03:18:04,640 Segmentron INFO: Sample: 241, validation pixAcc: 94.692, mIoU: 72.826
+2023-09-05 03:18:04,732 Segmentron INFO: Sample: 242, validation pixAcc: 94.697, mIoU: 72.906
+2023-09-05 03:18:04,823 Segmentron INFO: Sample: 243, validation pixAcc: 94.681, mIoU: 72.854
+2023-09-05 03:18:04,910 Segmentron INFO: Sample: 244, validation pixAcc: 94.681, mIoU: 72.943
+2023-09-05 03:18:04,998 Segmentron INFO: Sample: 245, validation pixAcc: 94.676, mIoU: 72.897
+2023-09-05 03:18:05,088 Segmentron INFO: Sample: 246, validation pixAcc: 94.684, mIoU: 72.930
+2023-09-05 03:18:05,176 Segmentron INFO: Sample: 247, validation pixAcc: 94.698, mIoU: 72.998
+2023-09-05 03:18:05,264 Segmentron INFO: Sample: 248, validation pixAcc: 94.704, mIoU: 73.004
+2023-09-05 03:18:05,352 Segmentron INFO: Sample: 249, validation pixAcc: 94.712, mIoU: 73.018
+2023-09-05 03:18:05,440 Segmentron INFO: Sample: 250, validation pixAcc: 94.730, mIoU: 73.109
+2023-09-05 03:18:05,531 Segmentron INFO: Sample: 251, validation pixAcc: 94.733, mIoU: 73.083
+2023-09-05 03:18:05,619 Segmentron INFO: Sample: 252, validation pixAcc: 94.740, mIoU: 73.114
+2023-09-05 03:18:05,711 Segmentron INFO: Sample: 253, validation pixAcc: 94.702, mIoU: 73.017
+2023-09-05 03:18:05,805 Segmentron INFO: Sample: 254, validation pixAcc: 94.716, mIoU: 73.058
+2023-09-05 03:18:05,892 Segmentron INFO: Sample: 255, validation pixAcc: 94.698, mIoU: 72.987
+2023-09-05 03:18:05,980 Segmentron INFO: Sample: 256, validation pixAcc: 94.698, mIoU: 72.966
+2023-09-05 03:18:06,068 Segmentron INFO: Sample: 257, validation pixAcc: 94.696, mIoU: 72.984
+2023-09-05 03:18:06,155 Segmentron INFO: Sample: 258, validation pixAcc: 94.670, mIoU: 72.753
+2023-09-05 03:18:06,245 Segmentron INFO: Sample: 259, validation pixAcc: 94.688, mIoU: 72.787
+2023-09-05 03:18:06,332 Segmentron INFO: Sample: 260, validation pixAcc: 94.690, mIoU: 72.780
+2023-09-05 03:18:06,424 Segmentron INFO: Sample: 261, validation pixAcc: 94.688, mIoU: 72.776
+2023-09-05 03:18:06,511 Segmentron INFO: Sample: 262, validation pixAcc: 94.702, mIoU: 72.806
+2023-09-05 03:18:06,605 Segmentron INFO: Sample: 263, validation pixAcc: 94.683, mIoU: 72.810
+2023-09-05 03:18:06,693 Segmentron INFO: Sample: 264, validation pixAcc: 94.692, mIoU: 73.202
+2023-09-05 03:18:06,783 Segmentron INFO: Sample: 265, validation pixAcc: 94.707, mIoU: 73.215
+2023-09-05 03:18:06,873 Segmentron INFO: Sample: 266, validation pixAcc: 94.714, mIoU: 73.218
+2023-09-05 03:18:06,961 Segmentron INFO: Sample: 267, validation pixAcc: 94.714, mIoU: 73.337
+2023-09-05 03:18:07,049 Segmentron INFO: Sample: 268, validation pixAcc: 94.713, mIoU: 73.329
+2023-09-05 03:18:07,137 Segmentron INFO: Sample: 269, validation pixAcc: 94.715, mIoU: 73.274
+2023-09-05 03:18:07,225 Segmentron INFO: Sample: 270, validation pixAcc: 94.716, mIoU: 73.207
+2023-09-05 03:18:07,314 Segmentron INFO: Sample: 271, validation pixAcc: 94.733, mIoU: 73.216
+2023-09-05 03:18:07,406 Segmentron INFO: Sample: 272, validation pixAcc: 94.716, mIoU: 73.107
+2023-09-05 03:18:07,494 Segmentron INFO: Sample: 273, validation pixAcc: 94.731, mIoU: 73.161
+2023-09-05 03:18:07,584 Segmentron INFO: Sample: 274, validation pixAcc: 94.731, mIoU: 73.178
+2023-09-05 03:18:07,672 Segmentron INFO: Sample: 275, validation pixAcc: 94.697, mIoU: 73.092
+2023-09-05 03:18:07,761 Segmentron INFO: Sample: 276, validation pixAcc: 94.692, mIoU: 73.029
+2023-09-05 03:18:07,848 Segmentron INFO: Sample: 277, validation pixAcc: 94.694, mIoU: 73.043
+2023-09-05 03:18:07,936 Segmentron INFO: Sample: 278, validation pixAcc: 94.682, mIoU: 73.008
+2023-09-05 03:18:08,029 Segmentron INFO: Sample: 279, validation pixAcc: 94.686, mIoU: 72.987
+2023-09-05 03:18:08,118 Segmentron INFO: Sample: 280, validation pixAcc: 94.696, mIoU: 73.011
+2023-09-05 03:18:08,206 Segmentron INFO: Sample: 281, validation pixAcc: 94.709, mIoU: 73.043
+2023-09-05 03:18:08,293 Segmentron INFO: Sample: 282, validation pixAcc: 94.715, mIoU: 73.055
+2023-09-05 03:18:08,381 Segmentron INFO: Sample: 283, validation pixAcc: 94.725, mIoU: 73.063
+2023-09-05 03:18:08,469 Segmentron INFO: Sample: 284, validation pixAcc: 94.728, mIoU: 73.134
+2023-09-05 03:18:08,557 Segmentron INFO: Sample: 285, validation pixAcc: 94.734, mIoU: 73.134
+2023-09-05 03:18:08,644 Segmentron INFO: Sample: 286, validation pixAcc: 94.738, mIoU: 73.161
+2023-09-05 03:18:08,733 Segmentron INFO: Sample: 287, validation pixAcc: 94.747, mIoU: 73.324
+2023-09-05 03:18:08,821 Segmentron INFO: Sample: 288, validation pixAcc: 94.747, mIoU: 73.343
+2023-09-05 03:18:08,909 Segmentron INFO: Sample: 289, validation pixAcc: 94.748, mIoU: 73.371
+2023-09-05 03:18:08,997 Segmentron INFO: Sample: 290, validation pixAcc: 94.758, mIoU: 73.387
+2023-09-05 03:18:09,084 Segmentron INFO: Sample: 291, validation pixAcc: 94.760, mIoU: 73.431
+2023-09-05 03:18:09,173 Segmentron INFO: Sample: 292, validation pixAcc: 94.758, mIoU: 73.404
+2023-09-05 03:18:09,263 Segmentron INFO: Sample: 293, validation pixAcc: 94.770, mIoU: 73.441
+2023-09-05 03:18:09,350 Segmentron INFO: Sample: 294, validation pixAcc: 94.758, mIoU: 73.357
+2023-09-05 03:18:09,438 Segmentron INFO: Sample: 295, validation pixAcc: 94.765, mIoU: 73.480
+2023-09-05 03:18:09,527 Segmentron INFO: Sample: 296, validation pixAcc: 94.773, mIoU: 73.513
+2023-09-05 03:18:09,615 Segmentron INFO: Sample: 297, validation pixAcc: 94.777, mIoU: 73.665
+2023-09-05 03:18:09,702 Segmentron INFO: Sample: 298, validation pixAcc: 94.771, mIoU: 73.674
+2023-09-05 03:18:09,790 Segmentron INFO: Sample: 299, validation pixAcc: 94.776, mIoU: 73.673
+2023-09-05 03:18:09,878 Segmentron INFO: Sample: 300, validation pixAcc: 94.776, mIoU: 73.800
+2023-09-05 03:18:09,966 Segmentron INFO: Sample: 301, validation pixAcc: 94.784, mIoU: 73.991
+2023-09-05 03:18:10,054 Segmentron INFO: Sample: 302, validation pixAcc: 94.783, mIoU: 74.019
+2023-09-05 03:18:10,142 Segmentron INFO: Sample: 303, validation pixAcc: 94.792, mIoU: 74.074
+2023-09-05 03:18:10,230 Segmentron INFO: Sample: 304, validation pixAcc: 94.803, mIoU: 74.082
+2023-09-05 03:18:10,318 Segmentron INFO: Sample: 305, validation pixAcc: 94.809, mIoU: 74.101
+2023-09-05 03:18:10,407 Segmentron INFO: Sample: 306, validation pixAcc: 94.820, mIoU: 74.128
+2023-09-05 03:18:10,495 Segmentron INFO: Sample: 307, validation pixAcc: 94.831, mIoU: 74.151
+2023-09-05 03:18:10,583 Segmentron INFO: Sample: 308, validation pixAcc: 94.828, mIoU: 74.132
+2023-09-05 03:18:10,672 Segmentron INFO: Sample: 309, validation pixAcc: 94.830, mIoU: 74.129
+2023-09-05 03:18:10,760 Segmentron INFO: Sample: 310, validation pixAcc: 94.831, mIoU: 74.118
+2023-09-05 03:18:10,851 Segmentron INFO: Sample: 311, validation pixAcc: 94.843, mIoU: 74.136
+2023-09-05 03:18:10,939 Segmentron INFO: Sample: 312, validation pixAcc: 94.855, mIoU: 74.152
+2023-09-05 03:18:11,027 Segmentron INFO: Sample: 313, validation pixAcc: 94.862, mIoU: 74.182
+2023-09-05 03:18:11,117 Segmentron INFO: Sample: 314, validation pixAcc: 94.849, mIoU: 74.052
+2023-09-05 03:18:11,205 Segmentron INFO: Sample: 315, validation pixAcc: 94.860, mIoU: 74.087
+2023-09-05 03:18:11,293 Segmentron INFO: Sample: 316, validation pixAcc: 94.864, mIoU: 74.102
+2023-09-05 03:18:11,381 Segmentron INFO: Sample: 317, validation pixAcc: 94.847, mIoU: 74.006
+2023-09-05 03:18:11,468 Segmentron INFO: Sample: 318, validation pixAcc: 94.858, mIoU: 74.071
+2023-09-05 03:18:11,556 Segmentron INFO: Sample: 319, validation pixAcc: 94.862, mIoU: 74.143
+2023-09-05 03:18:11,645 Segmentron INFO: Sample: 320, validation pixAcc: 94.854, mIoU: 74.140
+2023-09-05 03:18:11,733 Segmentron INFO: Sample: 321, validation pixAcc: 94.836, mIoU: 74.080
+2023-09-05 03:18:11,820 Segmentron INFO: Sample: 322, validation pixAcc: 94.846, mIoU: 74.081
+2023-09-05 03:18:11,909 Segmentron INFO: Sample: 323, validation pixAcc: 94.856, mIoU: 74.090
+2023-09-05 03:18:11,997 Segmentron INFO: Sample: 324, validation pixAcc: 94.866, mIoU: 74.156
+2023-09-05 03:18:12,085 Segmentron INFO: Sample: 325, validation pixAcc: 94.870, mIoU: 74.186
+2023-09-05 03:18:12,172 Segmentron INFO: Sample: 326, validation pixAcc: 94.863, mIoU: 74.170
+2023-09-05 03:18:12,260 Segmentron INFO: Sample: 327, validation pixAcc: 94.869, mIoU: 74.145
+2023-09-05 03:18:12,348 Segmentron INFO: Sample: 328, validation pixAcc: 94.860, mIoU: 74.079
+2023-09-05 03:18:12,436 Segmentron INFO: Sample: 329, validation pixAcc: 94.858, mIoU: 74.159
+2023-09-05 03:18:12,527 Segmentron INFO: Sample: 330, validation pixAcc: 94.858, mIoU: 73.954
+2023-09-05 03:18:12,615 Segmentron INFO: Sample: 331, validation pixAcc: 94.857, mIoU: 73.939
+2023-09-05 03:18:12,703 Segmentron INFO: Sample: 332, validation pixAcc: 94.857, mIoU: 73.929
+2023-09-05 03:18:12,794 Segmentron INFO: Sample: 333, validation pixAcc: 94.848, mIoU: 73.903
+2023-09-05 03:18:12,893 Segmentron INFO: Sample: 334, validation pixAcc: 94.814, mIoU: 73.855
+2023-09-05 03:18:12,986 Segmentron INFO: Sample: 335, validation pixAcc: 94.814, mIoU: 73.946
+2023-09-05 03:18:13,074 Segmentron INFO: Sample: 336, validation pixAcc: 94.814, mIoU: 73.760
+2023-09-05 03:18:13,162 Segmentron INFO: Sample: 337, validation pixAcc: 94.797, mIoU: 73.695
+2023-09-05 03:18:13,249 Segmentron INFO: Sample: 338, validation pixAcc: 94.792, mIoU: 73.688
+2023-09-05 03:18:13,337 Segmentron INFO: Sample: 339, validation pixAcc: 94.798, mIoU: 73.764
+2023-09-05 03:18:13,425 Segmentron INFO: Sample: 340, validation pixAcc: 94.800, mIoU: 73.751
+2023-09-05 03:18:13,513 Segmentron INFO: Sample: 341, validation pixAcc: 94.761, mIoU: 73.577
+2023-09-05 03:18:13,604 Segmentron INFO: Sample: 342, validation pixAcc: 94.764, mIoU: 73.653
+2023-09-05 03:18:13,693 Segmentron INFO: Sample: 343, validation pixAcc: 94.768, mIoU: 73.697
+2023-09-05 03:18:13,781 Segmentron INFO: Sample: 344, validation pixAcc: 94.770, mIoU: 73.684
+2023-09-05 03:18:13,869 Segmentron INFO: Sample: 345, validation pixAcc: 94.768, mIoU: 73.697
+2023-09-05 03:18:13,957 Segmentron INFO: Sample: 346, validation pixAcc: 94.760, mIoU: 73.781
+2023-09-05 03:18:14,045 Segmentron INFO: Sample: 347, validation pixAcc: 94.745, mIoU: 73.709
+2023-09-05 03:18:14,133 Segmentron INFO: Sample: 348, validation pixAcc: 94.744, mIoU: 73.640
+2023-09-05 03:18:14,226 Segmentron INFO: Sample: 349, validation pixAcc: 94.751, mIoU: 73.665
+2023-09-05 03:18:14,314 Segmentron INFO: Sample: 350, validation pixAcc: 94.741, mIoU: 73.590
+2023-09-05 03:18:14,402 Segmentron INFO: Sample: 351, validation pixAcc: 94.751, mIoU: 73.629
+2023-09-05 03:18:14,490 Segmentron INFO: Sample: 352, validation pixAcc: 94.739, mIoU: 73.575
+2023-09-05 03:18:14,579 Segmentron INFO: Sample: 353, validation pixAcc: 94.741, mIoU: 73.613
+2023-09-05 03:18:14,667 Segmentron INFO: Sample: 354, validation pixAcc: 94.751, mIoU: 73.639
+2023-09-05 03:18:14,754 Segmentron INFO: Sample: 355, validation pixAcc: 94.729, mIoU: 73.496
+2023-09-05 03:18:14,843 Segmentron INFO: Sample: 356, validation pixAcc: 94.737, mIoU: 73.509
+2023-09-05 03:18:14,931 Segmentron INFO: Sample: 357, validation pixAcc: 94.737, mIoU: 73.532
+2023-09-05 03:18:15,018 Segmentron INFO: Sample: 358, validation pixAcc: 94.742, mIoU: 73.554
+2023-09-05 03:18:15,106 Segmentron INFO: Sample: 359, validation pixAcc: 94.742, mIoU: 73.558
+2023-09-05 03:18:15,198 Segmentron INFO: Sample: 360, validation pixAcc: 94.751, mIoU: 73.605
+2023-09-05 03:18:15,286 Segmentron INFO: Sample: 361, validation pixAcc: 94.752, mIoU: 73.623
+2023-09-05 03:18:15,376 Segmentron INFO: Sample: 362, validation pixAcc: 94.755, mIoU: 73.633
+2023-09-05 03:18:15,464 Segmentron INFO: Sample: 363, validation pixAcc: 94.741, mIoU: 73.563
+2023-09-05 03:18:15,556 Segmentron INFO: Sample: 364, validation pixAcc: 94.740, mIoU: 73.556
+2023-09-05 03:18:15,644 Segmentron INFO: Sample: 365, validation pixAcc: 94.741, mIoU: 73.528
+2023-09-05 03:18:15,732 Segmentron INFO: Sample: 366, validation pixAcc: 94.749, mIoU: 73.571
+2023-09-05 03:18:15,824 Segmentron INFO: Sample: 367, validation pixAcc: 94.737, mIoU: 73.560
+2023-09-05 03:18:15,912 Segmentron INFO: Sample: 368, validation pixAcc: 94.748, mIoU: 73.609
+2023-09-05 03:18:16,000 Segmentron INFO: Sample: 369, validation pixAcc: 94.754, mIoU: 73.621
+2023-09-05 03:18:16,088 Segmentron INFO: Sample: 370, validation pixAcc: 94.733, mIoU: 73.451
+2023-09-05 03:18:16,175 Segmentron INFO: Sample: 371, validation pixAcc: 94.741, mIoU: 73.475
+2023-09-05 03:18:16,263 Segmentron INFO: Sample: 372, validation pixAcc: 94.751, mIoU: 73.494
+2023-09-05 03:18:16,352 Segmentron INFO: Sample: 373, validation pixAcc: 94.754, mIoU: 73.481
+2023-09-05 03:18:16,446 Segmentron INFO: Sample: 374, validation pixAcc: 94.737, mIoU: 73.385
+2023-09-05 03:18:16,538 Segmentron INFO: Sample: 375, validation pixAcc: 94.741, mIoU: 73.380
+2023-09-05 03:18:16,626 Segmentron INFO: Sample: 376, validation pixAcc: 94.753, mIoU: 73.399
+2023-09-05 03:18:16,714 Segmentron INFO: Sample: 377, validation pixAcc: 94.763, mIoU: 73.483
+2023-09-05 03:18:16,802 Segmentron INFO: Sample: 378, validation pixAcc: 94.765, mIoU: 73.487
+2023-09-05 03:18:16,890 Segmentron INFO: Sample: 379, validation pixAcc: 94.773, mIoU: 73.543
+2023-09-05 03:18:16,978 Segmentron INFO: Sample: 380, validation pixAcc: 94.772, mIoU: 73.575
+2023-09-05 03:18:17,071 Segmentron INFO: Sample: 381, validation pixAcc: 94.778, mIoU: 73.619
+2023-09-05 03:18:17,162 Segmentron INFO: Sample: 382, validation pixAcc: 94.765, mIoU: 73.624
+2023-09-05 03:18:17,255 Segmentron INFO: Sample: 383, validation pixAcc: 94.768, mIoU: 73.662
+2023-09-05 03:18:17,343 Segmentron INFO: Sample: 384, validation pixAcc: 94.779, mIoU: 73.719
+2023-09-05 03:18:17,431 Segmentron INFO: Sample: 385, validation pixAcc: 94.787, mIoU: 73.729
+2023-09-05 03:18:17,519 Segmentron INFO: Sample: 386, validation pixAcc: 94.794, mIoU: 73.767
+2023-09-05 03:18:17,607 Segmentron INFO: Sample: 387, validation pixAcc: 94.799, mIoU: 73.808
+2023-09-05 03:18:17,700 Segmentron INFO: Sample: 388, validation pixAcc: 94.809, mIoU: 73.885
+2023-09-05 03:18:17,788 Segmentron INFO: Sample: 389, validation pixAcc: 94.818, mIoU: 73.967
+2023-09-05 03:18:17,876 Segmentron INFO: Sample: 390, validation pixAcc: 94.825, mIoU: 73.992
+2023-09-05 03:18:17,967 Segmentron INFO: Sample: 391, validation pixAcc: 94.832, mIoU: 74.024
+2023-09-05 03:18:18,055 Segmentron INFO: Sample: 392, validation pixAcc: 94.829, mIoU: 74.023
+2023-09-05 03:18:18,143 Segmentron INFO: Sample: 393, validation pixAcc: 94.823, mIoU: 73.985
+2023-09-05 03:18:18,234 Segmentron INFO: Sample: 394, validation pixAcc: 94.824, mIoU: 74.056
+2023-09-05 03:18:18,322 Segmentron INFO: Sample: 395, validation pixAcc: 94.824, mIoU: 74.093
+2023-09-05 03:18:18,410 Segmentron INFO: Sample: 396, validation pixAcc: 94.828, mIoU: 74.173
+2023-09-05 03:18:18,501 Segmentron INFO: Sample: 397, validation pixAcc: 94.835, mIoU: 74.223
+2023-09-05 03:18:18,589 Segmentron INFO: Sample: 398, validation pixAcc: 94.816, mIoU: 74.169
+2023-09-05 03:18:18,677 Segmentron INFO: Sample: 399, validation pixAcc: 94.824, mIoU: 74.183
+2023-09-05 03:18:18,768 Segmentron INFO: Sample: 400, validation pixAcc: 94.828, mIoU: 74.194
+2023-09-05 03:18:18,855 Segmentron INFO: Sample: 401, validation pixAcc: 94.831, mIoU: 74.199
+2023-09-05 03:18:18,943 Segmentron INFO: Sample: 402, validation pixAcc: 94.839, mIoU: 74.221
+2023-09-05 03:18:19,031 Segmentron INFO: Sample: 403, validation pixAcc: 94.845, mIoU: 74.260
+2023-09-05 03:18:19,123 Segmentron INFO: Sample: 404, validation pixAcc: 94.851, mIoU: 74.290
+2023-09-05 03:18:19,211 Segmentron INFO: Sample: 405, validation pixAcc: 94.848, mIoU: 74.275
+2023-09-05 03:18:19,300 Segmentron INFO: Sample: 406, validation pixAcc: 94.850, mIoU: 74.290
+2023-09-05 03:18:19,388 Segmentron INFO: Sample: 407, validation pixAcc: 94.836, mIoU: 74.181
+2023-09-05 03:18:19,475 Segmentron INFO: Sample: 408, validation pixAcc: 94.827, mIoU: 74.207
+2023-09-05 03:18:19,564 Segmentron INFO: Sample: 409, validation pixAcc: 94.816, mIoU: 74.184
+2023-09-05 03:18:19,651 Segmentron INFO: Sample: 410, validation pixAcc: 94.807, mIoU: 74.073
+2023-09-05 03:18:19,742 Segmentron INFO: Sample: 411, validation pixAcc: 94.812, mIoU: 74.083
+2023-09-05 03:18:19,830 Segmentron INFO: Sample: 412, validation pixAcc: 94.821, mIoU: 74.108
+2023-09-05 03:18:19,924 Segmentron INFO: Sample: 413, validation pixAcc: 94.825, mIoU: 74.115
+2023-09-05 03:18:20,014 Segmentron INFO: Sample: 414, validation pixAcc: 94.834, mIoU: 74.147
+2023-09-05 03:18:20,102 Segmentron INFO: Sample: 415, validation pixAcc: 94.828, mIoU: 74.095
+2023-09-05 03:18:20,190 Segmentron INFO: Sample: 416, validation pixAcc: 94.835, mIoU: 74.119
+2023-09-05 03:18:20,278 Segmentron INFO: Sample: 417, validation pixAcc: 94.844, mIoU: 74.138
+2023-09-05 03:18:20,370 Segmentron INFO: Sample: 418, validation pixAcc: 94.855, mIoU: 74.162
+2023-09-05 03:18:20,457 Segmentron INFO: Sample: 419, validation pixAcc: 94.859, mIoU: 74.135
+2023-09-05 03:18:20,545 Segmentron INFO: Sample: 420, validation pixAcc: 94.869, mIoU: 74.168
+2023-09-05 03:18:20,638 Segmentron INFO: Sample: 421, validation pixAcc: 94.860, mIoU: 74.095
+2023-09-05 03:18:20,725 Segmentron INFO: Sample: 422, validation pixAcc: 94.870, mIoU: 74.115
+2023-09-05 03:18:20,816 Segmentron INFO: Sample: 423, validation pixAcc: 94.876, mIoU: 74.174
+2023-09-05 03:18:20,904 Segmentron INFO: Sample: 424, validation pixAcc: 94.878, mIoU: 74.183
+2023-09-05 03:18:20,992 Segmentron INFO: Sample: 425, validation pixAcc: 94.883, mIoU: 74.229
+2023-09-05 03:18:21,080 Segmentron INFO: Sample: 426, validation pixAcc: 94.878, mIoU: 74.223
+2023-09-05 03:18:21,168 Segmentron INFO: Sample: 427, validation pixAcc: 94.878, mIoU: 74.233
+2023-09-05 03:18:21,256 Segmentron INFO: Sample: 428, validation pixAcc: 94.868, mIoU: 74.171
+2023-09-05 03:18:21,344 Segmentron INFO: Sample: 429, validation pixAcc: 94.865, mIoU: 74.189
+2023-09-05 03:18:21,432 Segmentron INFO: Sample: 430, validation pixAcc: 94.852, mIoU: 74.157
+2023-09-05 03:18:21,520 Segmentron INFO: Sample: 431, validation pixAcc: 94.861, mIoU: 74.198
+2023-09-05 03:18:21,613 Segmentron INFO: Sample: 432, validation pixAcc: 94.868, mIoU: 74.217
+2023-09-05 03:18:21,702 Segmentron INFO: Sample: 433, validation pixAcc: 94.873, mIoU: 74.232
+2023-09-05 03:18:21,790 Segmentron INFO: Sample: 434, validation pixAcc: 94.874, mIoU: 74.238
+2023-09-05 03:18:21,878 Segmentron INFO: Sample: 435, validation pixAcc: 94.879, mIoU: 74.261
+2023-09-05 03:18:21,966 Segmentron INFO: Sample: 436, validation pixAcc: 94.882, mIoU: 74.367
+2023-09-05 03:18:22,054 Segmentron INFO: Sample: 437, validation pixAcc: 94.883, mIoU: 74.395
+2023-09-05 03:18:22,142 Segmentron INFO: Sample: 438, validation pixAcc: 94.879, mIoU: 74.405
+2023-09-05 03:18:22,230 Segmentron INFO: Sample: 439, validation pixAcc: 94.886, mIoU: 74.433
+2023-09-05 03:18:22,318 Segmentron INFO: Sample: 440, validation pixAcc: 94.879, mIoU: 74.449
+2023-09-05 03:18:22,406 Segmentron INFO: Sample: 441, validation pixAcc: 94.872, mIoU: 74.364
+2023-09-05 03:18:22,494 Segmentron INFO: Sample: 442, validation pixAcc: 94.863, mIoU: 74.092
+2023-09-05 03:18:22,586 Segmentron INFO: Sample: 443, validation pixAcc: 94.872, mIoU: 74.119
+2023-09-05 03:18:22,674 Segmentron INFO: Sample: 444, validation pixAcc: 94.860, mIoU: 74.104
+2023-09-05 03:18:22,765 Segmentron INFO: Sample: 445, validation pixAcc: 94.862, mIoU: 74.110
+2023-09-05 03:18:22,853 Segmentron INFO: Sample: 446, validation pixAcc: 94.870, mIoU: 74.153
+2023-09-05 03:18:22,941 Segmentron INFO: Sample: 447, validation pixAcc: 94.877, mIoU: 74.190
+2023-09-05 03:18:23,029 Segmentron INFO: Sample: 448, validation pixAcc: 94.884, mIoU: 74.224
+2023-09-05 03:18:23,117 Segmentron INFO: Sample: 449, validation pixAcc: 94.878, mIoU: 74.212
+2023-09-05 03:18:23,206 Segmentron INFO: Sample: 450, validation pixAcc: 94.886, mIoU: 74.219
+2023-09-05 03:18:23,294 Segmentron INFO: Sample: 451, validation pixAcc: 94.888, mIoU: 74.230
+2023-09-05 03:18:23,382 Segmentron INFO: Sample: 452, validation pixAcc: 94.889, mIoU: 74.240
+2023-09-05 03:18:23,471 Segmentron INFO: Sample: 453, validation pixAcc: 94.894, mIoU: 74.249
+2023-09-05 03:18:23,559 Segmentron INFO: Sample: 454, validation pixAcc: 94.898, mIoU: 74.241
+2023-09-05 03:18:23,647 Segmentron INFO: Sample: 455, validation pixAcc: 94.895, mIoU: 74.241
+2023-09-05 03:18:23,739 Segmentron INFO: Sample: 456, validation pixAcc: 94.903, mIoU: 74.271
+2023-09-05 03:18:23,827 Segmentron INFO: Sample: 457, validation pixAcc: 94.894, mIoU: 73.958
+2023-09-05 03:18:23,915 Segmentron INFO: Sample: 458, validation pixAcc: 94.899, mIoU: 73.973
+2023-09-05 03:18:24,004 Segmentron INFO: Sample: 459, validation pixAcc: 94.902, mIoU: 73.974
+2023-09-05 03:18:24,092 Segmentron INFO: Sample: 460, validation pixAcc: 94.905, mIoU: 73.984
+2023-09-05 03:18:24,180 Segmentron INFO: Sample: 461, validation pixAcc: 94.908, mIoU: 73.980
+2023-09-05 03:18:24,267 Segmentron INFO: Sample: 462, validation pixAcc: 94.911, mIoU: 74.018
+2023-09-05 03:18:24,355 Segmentron INFO: Sample: 463, validation pixAcc: 94.911, mIoU: 74.032
+2023-09-05 03:18:24,444 Segmentron INFO: Sample: 464, validation pixAcc: 94.901, mIoU: 74.011
+2023-09-05 03:18:24,532 Segmentron INFO: Sample: 465, validation pixAcc: 94.903, mIoU: 73.979
+2023-09-05 03:18:24,620 Segmentron INFO: Sample: 466, validation pixAcc: 94.909, mIoU: 74.015
+2023-09-05 03:18:24,708 Segmentron INFO: Sample: 467, validation pixAcc: 94.908, mIoU: 74.064
+2023-09-05 03:18:24,796 Segmentron INFO: Sample: 468, validation pixAcc: 94.905, mIoU: 74.017
+2023-09-05 03:18:24,884 Segmentron INFO: Sample: 469, validation pixAcc: 94.911, mIoU: 74.040
+2023-09-05 03:18:24,972 Segmentron INFO: Sample: 470, validation pixAcc: 94.918, mIoU: 74.082
+2023-09-05 03:18:25,060 Segmentron INFO: Sample: 471, validation pixAcc: 94.916, mIoU: 74.011
+2023-09-05 03:18:25,148 Segmentron INFO: Sample: 472, validation pixAcc: 94.911, mIoU: 73.986
+2023-09-05 03:18:25,240 Segmentron INFO: Sample: 473, validation pixAcc: 94.911, mIoU: 73.975
+2023-09-05 03:18:25,332 Segmentron INFO: Sample: 474, validation pixAcc: 94.908, mIoU: 73.988
+2023-09-05 03:18:25,423 Segmentron INFO: Sample: 475, validation pixAcc: 94.915, mIoU: 74.016
+2023-09-05 03:18:25,513 Segmentron INFO: Sample: 476, validation pixAcc: 94.920, mIoU: 74.042
+2023-09-05 03:18:25,600 Segmentron INFO: Sample: 477, validation pixAcc: 94.914, mIoU: 74.169
+2023-09-05 03:18:25,688 Segmentron INFO: Sample: 478, validation pixAcc: 94.913, mIoU: 74.173
+2023-09-05 03:18:25,777 Segmentron INFO: Sample: 479, validation pixAcc: 94.920, mIoU: 74.179
+2023-09-05 03:18:25,865 Segmentron INFO: Sample: 480, validation pixAcc: 94.923, mIoU: 74.247
+2023-09-05 03:18:25,953 Segmentron INFO: Sample: 481, validation pixAcc: 94.930, mIoU: 74.306
+2023-09-05 03:18:26,041 Segmentron INFO: Sample: 482, validation pixAcc: 94.933, mIoU: 74.381
+2023-09-05 03:18:26,129 Segmentron INFO: Sample: 483, validation pixAcc: 94.938, mIoU: 74.394
+2023-09-05 03:18:26,217 Segmentron INFO: Sample: 484, validation pixAcc: 94.939, mIoU: 74.419
+2023-09-05 03:18:26,305 Segmentron INFO: Sample: 485, validation pixAcc: 94.946, mIoU: 74.427
+2023-09-05 03:18:26,393 Segmentron INFO: Sample: 486, validation pixAcc: 94.953, mIoU: 74.476
+2023-09-05 03:18:26,481 Segmentron INFO: Sample: 487, validation pixAcc: 94.950, mIoU: 74.465
+2023-09-05 03:18:26,569 Segmentron INFO: Sample: 488, validation pixAcc: 94.953, mIoU: 74.484
+2023-09-05 03:18:26,657 Segmentron INFO: Sample: 489, validation pixAcc: 94.959, mIoU: 74.502
+2023-09-05 03:18:26,751 Segmentron INFO: Sample: 490, validation pixAcc: 94.960, mIoU: 74.473
+2023-09-05 03:18:26,842 Segmentron INFO: Sample: 491, validation pixAcc: 94.963, mIoU: 74.483
+2023-09-05 03:18:26,931 Segmentron INFO: Sample: 492, validation pixAcc: 94.967, mIoU: 74.512
+2023-09-05 03:18:27,019 Segmentron INFO: Sample: 493, validation pixAcc: 94.957, mIoU: 74.479
+2023-09-05 03:18:27,107 Segmentron INFO: Sample: 494, validation pixAcc: 94.959, mIoU: 74.479
+2023-09-05 03:18:27,195 Segmentron INFO: Sample: 495, validation pixAcc: 94.967, mIoU: 74.518
+2023-09-05 03:18:27,284 Segmentron INFO: Sample: 496, validation pixAcc: 94.968, mIoU: 74.533
+2023-09-05 03:18:27,372 Segmentron INFO: Sample: 497, validation pixAcc: 94.951, mIoU: 74.401
+2023-09-05 03:18:27,460 Segmentron INFO: Sample: 498, validation pixAcc: 94.951, mIoU: 74.412
+2023-09-05 03:18:27,548 Segmentron INFO: Sample: 499, validation pixAcc: 94.946, mIoU: 74.399
+2023-09-05 03:18:27,636 Segmentron INFO: Sample: 500, validation pixAcc: 94.937, mIoU: 74.340
+2023-09-05 03:18:27,724 Segmentron INFO: Sample: 501, validation pixAcc: 94.944, mIoU: 74.432
+2023-09-05 03:18:27,812 Segmentron INFO: Sample: 502, validation pixAcc: 94.941, mIoU: 74.443
+2023-09-05 03:18:27,900 Segmentron INFO: Sample: 503, validation pixAcc: 94.935, mIoU: 74.476
+2023-09-05 03:18:27,988 Segmentron INFO: Sample: 504, validation pixAcc: 94.928, mIoU: 74.427
+2023-09-05 03:18:28,077 Segmentron INFO: Sample: 505, validation pixAcc: 94.929, mIoU: 74.439
+2023-09-05 03:18:28,164 Segmentron INFO: Sample: 506, validation pixAcc: 94.923, mIoU: 74.430
+2023-09-05 03:18:28,252 Segmentron INFO: Sample: 507, validation pixAcc: 94.914, mIoU: 74.366
+2023-09-05 03:18:28,346 Segmentron INFO: Sample: 508, validation pixAcc: 94.917, mIoU: 74.359
+2023-09-05 03:18:28,436 Segmentron INFO: Sample: 509, validation pixAcc: 94.893, mIoU: 74.279
+2023-09-05 03:18:28,524 Segmentron INFO: Sample: 510, validation pixAcc: 94.875, mIoU: 74.283
+2023-09-05 03:18:28,617 Segmentron INFO: Sample: 511, validation pixAcc: 94.881, mIoU: 74.404
+2023-09-05 03:18:28,705 Segmentron INFO: Sample: 512, validation pixAcc: 94.879, mIoU: 74.410
+2023-09-05 03:18:28,794 Segmentron INFO: Sample: 513, validation pixAcc: 94.887, mIoU: 74.421
+2023-09-05 03:18:28,882 Segmentron INFO: Sample: 514, validation pixAcc: 94.890, mIoU: 74.466
+2023-09-05 03:18:28,970 Segmentron INFO: Sample: 515, validation pixAcc: 94.893, mIoU: 74.494
+2023-09-05 03:18:29,058 Segmentron INFO: Sample: 516, validation pixAcc: 94.887, mIoU: 74.431
+2023-09-05 03:18:29,146 Segmentron INFO: Sample: 517, validation pixAcc: 94.893, mIoU: 74.468
+2023-09-05 03:18:29,236 Segmentron INFO: Sample: 518, validation pixAcc: 94.891, mIoU: 74.461
+2023-09-05 03:18:29,324 Segmentron INFO: Sample: 519, validation pixAcc: 94.892, mIoU: 74.477
+2023-09-05 03:18:29,412 Segmentron INFO: Sample: 520, validation pixAcc: 94.894, mIoU: 74.499
+2023-09-05 03:18:29,506 Segmentron INFO: Sample: 521, validation pixAcc: 94.902, mIoU: 74.515
+2023-09-05 03:18:29,594 Segmentron INFO: Sample: 522, validation pixAcc: 94.905, mIoU: 74.513
+2023-09-05 03:18:29,682 Segmentron INFO: Sample: 523, validation pixAcc: 94.910, mIoU: 74.500
+2023-09-05 03:18:29,770 Segmentron INFO: Sample: 524, validation pixAcc: 94.917, mIoU: 74.514
+2023-09-05 03:18:29,858 Segmentron INFO: Sample: 525, validation pixAcc: 94.915, mIoU: 74.536
+2023-09-05 03:18:29,946 Segmentron INFO: Sample: 526, validation pixAcc: 94.897, mIoU: 74.538
+2023-09-05 03:18:30,034 Segmentron INFO: Sample: 527, validation pixAcc: 94.893, mIoU: 74.534
+2023-09-05 03:18:30,122 Segmentron INFO: Sample: 528, validation pixAcc: 94.883, mIoU: 74.486
+2023-09-05 03:18:30,211 Segmentron INFO: Sample: 529, validation pixAcc: 94.886, mIoU: 74.488
+2023-09-05 03:18:30,299 Segmentron INFO: Sample: 530, validation pixAcc: 94.871, mIoU: 74.416
+2023-09-05 03:18:30,386 Segmentron INFO: Sample: 531, validation pixAcc: 94.869, mIoU: 74.401
+2023-09-05 03:18:30,475 Segmentron INFO: Sample: 532, validation pixAcc: 94.870, mIoU: 74.390
+2023-09-05 03:18:30,567 Segmentron INFO: Sample: 533, validation pixAcc: 94.873, mIoU: 74.420
+2023-09-05 03:18:30,655 Segmentron INFO: Sample: 534, validation pixAcc: 94.865, mIoU: 74.400
+2023-09-05 03:18:30,744 Segmentron INFO: Sample: 535, validation pixAcc: 94.872, mIoU: 74.411
+2023-09-05 03:18:30,832 Segmentron INFO: Sample: 536, validation pixAcc: 94.862, mIoU: 74.367
+2023-09-05 03:18:30,926 Segmentron INFO: Sample: 537, validation pixAcc: 94.868, mIoU: 74.371
+2023-09-05 03:18:31,015 Segmentron INFO: Sample: 538, validation pixAcc: 94.870, mIoU: 74.386
+2023-09-05 03:18:31,102 Segmentron INFO: Sample: 539, validation pixAcc: 94.866, mIoU: 74.384
+2023-09-05 03:18:31,190 Segmentron INFO: Sample: 540, validation pixAcc: 94.873, mIoU: 74.436
+2023-09-05 03:18:31,277 Segmentron INFO: Sample: 541, validation pixAcc: 94.864, mIoU: 74.412
+2023-09-05 03:18:31,364 Segmentron INFO: Sample: 542, validation pixAcc: 94.869, mIoU: 74.434
+2023-09-05 03:18:31,452 Segmentron INFO: Sample: 543, validation pixAcc: 94.873, mIoU: 74.442
+2023-09-05 03:18:31,539 Segmentron INFO: Sample: 544, validation pixAcc: 94.876, mIoU: 74.485
+2023-09-05 03:18:31,626 Segmentron INFO: Sample: 545, validation pixAcc: 94.873, mIoU: 74.562
+2023-09-05 03:18:31,713 Segmentron INFO: Sample: 546, validation pixAcc: 94.866, mIoU: 74.546
+2023-09-05 03:18:31,801 Segmentron INFO: Sample: 547, validation pixAcc: 94.870, mIoU: 74.597
+2023-09-05 03:18:31,888 Segmentron INFO: Sample: 548, validation pixAcc: 94.860, mIoU: 74.485
+2023-09-05 03:18:31,975 Segmentron INFO: Sample: 549, validation pixAcc: 94.867, mIoU: 74.492
+2023-09-05 03:18:32,063 Segmentron INFO: Sample: 550, validation pixAcc: 94.864, mIoU: 74.487
+2023-09-05 03:18:32,150 Segmentron INFO: Sample: 551, validation pixAcc: 94.868, mIoU: 74.529
+2023-09-05 03:18:32,237 Segmentron INFO: Sample: 552, validation pixAcc: 94.876, mIoU: 74.560
+2023-09-05 03:18:32,324 Segmentron INFO: Sample: 553, validation pixAcc: 94.875, mIoU: 74.584
+2023-09-05 03:18:32,418 Segmentron INFO: Sample: 554, validation pixAcc: 94.879, mIoU: 74.586
+2023-09-05 03:18:32,533 Segmentron INFO: Eval use time: 51.201 second
+2023-09-05 03:18:32,534 Segmentron INFO: End validation pixAcc: 94.879, mIoU: 74.586
+2023-09-05 03:18:32,537 Segmentron INFO: Category iou: 
++------------+--------------+----------+
+|  class id  |  class name  |   iou    |
++============+==============+==========+
+|     0      |  Background  | 0.960108 |
++------------+--------------+----------+
+|     1      |    Shelf     | 0.557427 |
++------------+--------------+----------+
+|     2      | Jar or Tank  | 0.707853 |
++------------+--------------+----------+
+|     3      |   Freezer    | 0.682976 |
++------------+--------------+----------+
+|     4      |    Window    | 0.636241 |
++------------+--------------+----------+
+|     5      |  Glass Door  | 0.634989 |
++------------+--------------+----------+
+|     6      |   Eyeglass   | 0.830989 |
++------------+--------------+----------+
+|     7      |     Cup      | 0.867556 |
++------------+--------------+----------+
+|     8      | Floor Glass  | 0.799203 |
++------------+--------------+----------+
+|     9      |  Glass Bow   | 0.747866 |
++------------+--------------+----------+
+|     10     | Water Bottle | 0.836672 |
++------------+--------------+----------+
+|     11     | Storage Box  | 0.68844  |
++------------+--------------+----------+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************

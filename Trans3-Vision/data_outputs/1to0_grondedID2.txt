@@ -1,0 +1,297 @@
+2023-09-13 19:08:08,737 Segmentron INFO: Using 2 GPUs
+2023-09-13 19:08:08,738 Segmentron INFO: Namespace(config_file='configs/Grounded-ID2/pvt_medium_FPT_ID2.yaml', device='cuda', distributed=True, input_img='/home/MichaelWang/Test_Images', local_rank=0, log_iter=10, no_cuda=False, num_gpus=2, opts=[], resume=None, skip_val=False, test=False, val_epoch=1, vis=False)
+2023-09-13 19:08:08,738 Segmentron INFO: {
+        "SEED": 1024,
+        "TIME_STAMP": "2023-09-13-19-08",
+        "ROOT_PATH": "/home/MichaelWang/Trans3-Vision",
+        "PHASE": "test",
+        "DATASET": {
+                "NAME": "grounded_id2",
+                "MEAN": [
+                        0.485,
+                        0.456,
+                        0.406
+                ],
+                "STD": [
+                        0.229,
+                        0.224,
+                        0.225
+                ],
+                "IGNORE_INDEX": -1,
+                "WORKERS": 8,
+                "MODE": "testval"
+        },
+        "AUG": {
+                "MIRROR": true,
+                "BLUR_PROB": 0.0,
+                "BLUR_RADIUS": 0.0,
+                "COLOR_JITTER": null,
+                "CROP": false
+        },
+        "TRAIN": {
+                "EPOCHS": 150,
+                "ITERS": 40000,
+                "BATCH_SIZE": 4,
+                "CROP_SIZE": [
+                        512,
+                        512
+                ],
+                "BASE_SIZE": 512,
+                "MODEL_SAVE_DIR": "/data/MichaelWang/checkpoints/Grounded_ID2/pvt_medium_FPT",
+                "LOG_SAVE_DIR": "workdirs/",
+                "PRETRAINED_MODEL_PATH": "",
+                "BACKBONE_PRETRAINED": true,
+                "BACKBONE_PRETRAINED_PATH": "pretrained/pvt_medium.pth",
+                "RESUME_MODEL_PATH": "",
+                "SYNC_BATCH_NORM": true,
+                "SNAPSHOT_EPOCH": 1,
+                "APEX": true
+        },
+        "SOLVER": {
+                "LR": 0.0001,
+                "OPTIMIZER": "adamw",
+                "EPSILON": 1e-08,
+                "MOMENTUM": 0.9,
+                "WEIGHT_DECAY": 0.0001,
+                "DECODER_LR_FACTOR": 10.0,
+                "LR_SCHEDULER": "poly",
+                "POLY": {
+                        "POWER": 0.9
+                },
+                "STEP": {
+                        "GAMMA": 0.1,
+                        "DECAY_EPOCH": [
+                                10,
+                                20
+                        ]
+                },
+                "WARMUP": {
+                        "EPOCHS": 0.0,
+                        "FACTOR": 0.3333333333333333,
+                        "METHOD": "linear"
+                },
+                "OHEM": false,
+                "AUX": false,
+                "AUX_WEIGHT": 0.4,
+                "LOSS_NAME": ""
+        },
+        "TEST": {
+                "TEST_MODEL_PATH": "/data/MichaelWang/checkpoints/Grounded_ID2/1to0_pvt_medium_FPT/115.pth",
+                "BATCH_SIZE": 4,
+                "CROP_SIZE": [
+                        512,
+                        512
+                ],
+                "SCALES": [
+                        1.0
+                ],
+                "FLIP": false
+        },
+        "VISUAL": {
+                "OUTPUT_DIR": "../runs/visual/"
+        },
+        "MODEL": {
+                "MODEL_NAME": "PVT_FPT",
+                "BACKBONE": "pvt_medium",
+                "BACKBONE_SCALE": 1.0,
+                "MULTI_LOSS_WEIGHT": [
+                        1.0
+                ],
+                "DEFAULT_GROUP_NUMBER": 32,
+                "DEFAULT_EPSILON": 1e-05,
+                "BN_TYPE": "BN",
+                "BN_EPS_FOR_ENCODER": null,
+                "BN_EPS_FOR_DECODER": null,
+                "OUTPUT_STRIDE": 16,
+                "BN_MOMENTUM": null,
+                "EMB_CHANNELS": 64,
+                "DANET": {
+                        "MULTI_DILATION": null,
+                        "MULTI_GRID": false
+                },
+                "DEEPLABV3_PLUS": {
+                        "USE_ASPP": true,
+                        "ENABLE_DECODER": true,
+                        "ASPP_WITH_SEP_CONV": true,
+                        "DECODER_USE_SEP_CONV": true
+                },
+                "OCNet": {
+                        "OC_ARCH": "base"
+                },
+                "ENCNET": {
+                        "SE_LOSS": true,
+                        "SE_WEIGHT": 0.2,
+                        "LATERAL": true
+                },
+                "CCNET": {
+                        "RECURRENCE": 2
+                },
+                "CGNET": {
+                        "STAGE2_BLOCK_NUM": 3,
+                        "STAGE3_BLOCK_NUM": 21
+                },
+                "POINTREND": {
+                        "BASEMODEL": "DeepLabV3_Plus"
+                },
+                "HRNET": {
+                        "PRETRAINED_LAYERS": [
+                                "*"
+                        ],
+                        "STEM_INPLANES": 64,
+                        "FINAL_CONV_KERNEL": 1,
+                        "WITH_HEAD": true,
+                        "STAGE1": {
+                                "NUM_MODULES": 1,
+                                "NUM_BRANCHES": 1,
+                                "NUM_BLOCKS": [
+                                        1
+                                ],
+                                "NUM_CHANNELS": [
+                                        32
+                                ],
+                                "BLOCK": "BOTTLENECK",
+                                "FUSE_METHOD": "SUM"
+                        },
+                        "STAGE2": {
+                                "NUM_MODULES": 1,
+                                "NUM_BRANCHES": 2,
+                                "NUM_BLOCKS": [
+                                        4,
+                                        4
+                                ],
+                                "NUM_CHANNELS": [
+                                        32,
+                                        64
+                                ],
+                                "BLOCK": "BASIC",
+                                "FUSE_METHOD": "SUM"
+                        },
+                        "STAGE3": {
+                                "NUM_MODULES": 1,
+                                "NUM_BRANCHES": 3,
+                                "NUM_BLOCKS": [
+                                        4,
+                                        4,
+                                        4
+                                ],
+                                "NUM_CHANNELS": [
+                                        32,
+                                        64,
+                                        128
+                                ],
+                                "BLOCK": "BASIC",
+                                "FUSE_METHOD": "SUM"
+                        },
+                        "STAGE4": {
+                                "NUM_MODULES": 1,
+                                "NUM_BRANCHES": 4,
+                                "NUM_BLOCKS": [
+                                        4,
+                                        4,
+                                        4,
+                                        4
+                                ],
+                                "NUM_CHANNELS": [
+                                        32,
+                                        64,
+                                        128,
+                                        256
+                                ],
+                                "BLOCK": "BASIC",
+                                "FUSE_METHOD": "SUM"
+                        }
+                },
+                "TRANSLAB": {
+                        "BOUNDARY_WEIGHT": 5
+                },
+                "TRANS4TRANS": {
+                        "embed_dim": 256,
+                        "depth": 4,
+                        "num_heads": 8,
+                        "mlp_ratio": 3.0,
+                        "hid_dim": 64
+                }
+        }
+}
+2023-09-13 19:08:08,742 Segmentron INFO: Found 358 images in the folder /home/MichaelWang/Trans3-Vision/datasets/Grounded_ID2/Trans10K_cls12
+2023-09-13 19:08:09,227 Segmentron INFO: load test model from /data/MichaelWang/checkpoints/Grounded_ID2/1to0_pvt_medium_FPT/115.pth
+2023-09-13 19:08:14,687 Segmentron INFO: <All keys matched successfully>
+2023-09-13 19:08:14,886 Segmentron INFO: Start validation, Total sample: 45
+2023-09-13 19:08:16,626 Segmentron INFO: Sample: 1, validation pixAcc: 91.645, mIoU: 22.128
+2023-09-13 19:08:16,712 Segmentron INFO: Sample: 2, validation pixAcc: 89.818, mIoU: 22.072
+2023-09-13 19:08:16,808 Segmentron INFO: Sample: 3, validation pixAcc: 90.378, mIoU: 21.632
+2023-09-13 19:08:16,896 Segmentron INFO: Sample: 4, validation pixAcc: 89.125, mIoU: 20.971
+2023-09-13 19:08:16,992 Segmentron INFO: Sample: 5, validation pixAcc: 89.943, mIoU: 20.930
+2023-09-13 19:08:17,083 Segmentron INFO: Sample: 6, validation pixAcc: 89.522, mIoU: 20.861
+2023-09-13 19:08:17,169 Segmentron INFO: Sample: 7, validation pixAcc: 88.615, mIoU: 20.049
+2023-09-13 19:08:17,264 Segmentron INFO: Sample: 8, validation pixAcc: 88.457, mIoU: 20.002
+2023-09-13 19:08:17,349 Segmentron INFO: Sample: 9, validation pixAcc: 88.360, mIoU: 19.842
+2023-09-13 19:08:17,436 Segmentron INFO: Sample: 10, validation pixAcc: 88.083, mIoU: 19.618
+2023-09-13 19:08:17,532 Segmentron INFO: Sample: 11, validation pixAcc: 87.999, mIoU: 19.631
+2023-09-13 19:08:17,621 Segmentron INFO: Sample: 12, validation pixAcc: 88.334, mIoU: 19.769
+2023-09-13 19:08:17,719 Segmentron INFO: Sample: 13, validation pixAcc: 88.644, mIoU: 19.964
+2023-09-13 19:08:17,805 Segmentron INFO: Sample: 14, validation pixAcc: 88.855, mIoU: 20.559
+2023-09-13 19:08:17,900 Segmentron INFO: Sample: 15, validation pixAcc: 88.742, mIoU: 20.536
+2023-09-13 19:08:17,986 Segmentron INFO: Sample: 16, validation pixAcc: 88.775, mIoU: 21.381
+2023-09-13 19:08:18,082 Segmentron INFO: Sample: 17, validation pixAcc: 88.730, mIoU: 20.967
+2023-09-13 19:08:18,168 Segmentron INFO: Sample: 18, validation pixAcc: 88.787, mIoU: 20.960
+2023-09-13 19:08:18,257 Segmentron INFO: Sample: 19, validation pixAcc: 88.253, mIoU: 20.597
+2023-09-13 19:08:18,353 Segmentron INFO: Sample: 20, validation pixAcc: 88.603, mIoU: 21.472
+2023-09-13 19:08:18,439 Segmentron INFO: Sample: 21, validation pixAcc: 88.349, mIoU: 20.601
+2023-09-13 19:08:18,525 Segmentron INFO: Sample: 22, validation pixAcc: 88.272, mIoU: 20.664
+2023-09-13 19:08:18,624 Segmentron INFO: Sample: 23, validation pixAcc: 88.365, mIoU: 20.743
+2023-09-13 19:08:18,709 Segmentron INFO: Sample: 24, validation pixAcc: 88.368, mIoU: 20.843
+2023-09-13 19:08:18,805 Segmentron INFO: Sample: 25, validation pixAcc: 88.222, mIoU: 20.727
+2023-09-13 19:08:18,900 Segmentron INFO: Sample: 26, validation pixAcc: 88.354, mIoU: 20.715
+2023-09-13 19:08:18,996 Segmentron INFO: Sample: 27, validation pixAcc: 88.333, mIoU: 20.108
+2023-09-13 19:08:19,091 Segmentron INFO: Sample: 28, validation pixAcc: 88.415, mIoU: 20.495
+2023-09-13 19:08:19,176 Segmentron INFO: Sample: 29, validation pixAcc: 88.287, mIoU: 20.405
+2023-09-13 19:08:19,262 Segmentron INFO: Sample: 30, validation pixAcc: 88.525, mIoU: 20.487
+2023-09-13 19:08:19,349 Segmentron INFO: Sample: 31, validation pixAcc: 88.529, mIoU: 20.533
+2023-09-13 19:08:19,433 Segmentron INFO: Sample: 32, validation pixAcc: 88.642, mIoU: 20.684
+2023-09-13 19:08:19,518 Segmentron INFO: Sample: 33, validation pixAcc: 88.733, mIoU: 20.231
+2023-09-13 19:08:19,605 Segmentron INFO: Sample: 34, validation pixAcc: 88.779, mIoU: 20.222
+2023-09-13 19:08:19,690 Segmentron INFO: Sample: 35, validation pixAcc: 88.870, mIoU: 20.358
+2023-09-13 19:08:19,775 Segmentron INFO: Sample: 36, validation pixAcc: 88.948, mIoU: 20.322
+2023-09-13 19:08:19,862 Segmentron INFO: Sample: 37, validation pixAcc: 88.967, mIoU: 20.280
+2023-09-13 19:08:19,948 Segmentron INFO: Sample: 38, validation pixAcc: 89.002, mIoU: 20.286
+2023-09-13 19:08:20,033 Segmentron INFO: Sample: 39, validation pixAcc: 89.024, mIoU: 20.275
+2023-09-13 19:08:20,121 Segmentron INFO: Sample: 40, validation pixAcc: 89.032, mIoU: 20.228
+2023-09-13 19:08:20,206 Segmentron INFO: Sample: 41, validation pixAcc: 89.087, mIoU: 20.579
+2023-09-13 19:08:20,291 Segmentron INFO: Sample: 42, validation pixAcc: 89.129, mIoU: 20.528
+2023-09-13 19:08:20,376 Segmentron INFO: Sample: 43, validation pixAcc: 89.067, mIoU: 20.559
+2023-09-13 19:08:20,460 Segmentron INFO: Sample: 44, validation pixAcc: 89.182, mIoU: 20.487
+2023-09-13 19:08:20,573 Segmentron INFO: Sample: 45, validation pixAcc: 89.286, mIoU: 20.562
+2023-09-13 19:08:20,678 Segmentron INFO: Eval use time: 5.792 second
+2023-09-13 19:08:20,678 Segmentron INFO: End validation pixAcc: 89.286, mIoU: 20.562
+2023-09-13 19:08:20,680 Segmentron INFO: Category iou: 
+ +------------+--------------+----------+
+|  class id  |  class name  |   iou    |
++============+==============+==========+
+|     0      |  Background  | 0.887918 |
++------------+--------------+----------+
+|     1      |    Shelf     |    0     |
++------------+--------------+----------+
+|     2      | Jar or Tank  |    0     |
++------------+--------------+----------+
+|     3      |   Freezer    |    0     |
++------------+--------------+----------+
+|     4      |    Window    | 0.138654 |
++------------+--------------+----------+
+|     5      |  Glass Door  | 0.706939 |
++------------+--------------+----------+
+|     6      |   Eyeglass   |    0     |
++------------+--------------+----------+
+|     7      |     Cup      |    0     |
++------------+--------------+----------+
+|     8      | Floor Glass  | 0.43205  |
++------------+--------------+----------+
+|     9      |  Glass Bow   |    0     |
++------------+--------------+----------+
+|     10     | Water Bottle |    0     |
++------------+--------------+----------+
+|     11     | Storage Box  | 0.301871 |
++------------+--------------+----------+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
