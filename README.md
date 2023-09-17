@@ -20,7 +20,7 @@ We also created a complete pipeline and methodolgy for generating unlimited trai
 ## Installation
 
 ### Stable Diffusion
-For specific details, please reference [web-diffusion](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+For specific details, please reference [web-diffusion](https://github.com/AUTOMATIC1111/stable-diffusion-webui).
 
 ### Pipeline
 The code requires `python>=3.8`, as well as `pytorch>=1.7` and `torchvision>=0.8`. Please follow the instructions [here](https://pytorch.org/get-started/locally/) to install both PyTorch and TorchVision dependencies. Installing both PyTorch and TorchVision with CUDA support is strongly recommended.
@@ -59,5 +59,3 @@ Trans3-Vision utilizes Backpropagation and Gradient Reversal Layers. During trai
 <p float="left">
   <img src="./assets/Trans3-Vision_design.png" width="65%" />
 </p>
-
-
