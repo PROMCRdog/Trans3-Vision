@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: segmentron
+Version: 0.1
+Summary: platform for semantic segmentation base on pytorch.
+Home-page: https://github.com/LikeLy-Journey/SegmenTron
+Author: LikeLy-Journey
+License-File: LICENSE
